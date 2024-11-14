@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SelectorActivity">
+    tools:context=".ResultadoActivity">
 
     <LinearLayout
         android:id="@+id/lyTitulo"
@@ -13,14 +13,15 @@
         android:layout_height="56dp"
         android:orientation="horizontal"
         android:background="@color/black"
-        android:padding="16dp"
         android:gravity="center_horizontal|center_vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imgSelctorBack"
+            android:id="@+id/imgBack"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:clickable="true"
@@ -30,13 +31,13 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Opciones"
+            android:text="Resultados"
             android:textColor="@color/white"
             android:gravity="center"
             android:textSize="16dp"
             android:textStyle="bold"/>
-
     </LinearLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clyPrincipal"
         android:layout_width="match_parent"
@@ -48,30 +49,29 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <TextView
-            android:id="@+id/tvElegir"
+            android:id="@+id/tvSubTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Elige que deseas calcular"
+            android:text="Material a utilizar para 5 mt2 de terraza"
             android:layout_marginTop="16dp"
-            tools:layout_editor_absoluteX="150dp"
-            tools:layout_editor_absoluteY="66dp"
+            android:textSize="20dp"
+            android:textStyle="bold"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvOpciones"
+            android:id="@+id/rvResultado"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:clickable="true"
-            tools:listitem="@layout/configuracion_item"
+            tools:listitem="@layout/resultado_item"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvElegir"/>
+            app:layout_constraintTop_toBottomOf="@id/tvSubTitle"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

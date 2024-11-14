@@ -13,7 +13,8 @@
         android:layout_height="56dp"
         android:orientation="horizontal"
         android:background="@color/black"
-        android:gravity="center_horizontal"
+        android:gravity="center_horizontal|center_vertical"
+        android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -22,7 +23,17 @@
             android:layout_height="match_parent"
             android:text="Calcular Material"
             android:textColor="@color/white"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:textSize="16dp"
+            android:textStyle="bold"/>
+        <ImageView
+            android:id="@+id/imgInfo"
+            android:layout_width="45dp"
+            android:layout_height="24dp"
+            android:clickable="true"
+            android:contentDescription="info"
+            android:paddingEnd="21dp"
+            android:src="@drawable/ic_info_outline_24"/>
     </LinearLayout>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clyPrincipal"
@@ -46,26 +57,38 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/etElegir"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clyElegir"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Selecciona una opcion"
-            android:clickable="true"
-            android:drawableEnd="@drawable/ic_arrow_right_24"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvElegir"/>
+            app:layout_constraintTop_toBottomOf="@id/tvElegir">
+            <EditText
+                android:id="@+id/etElegir"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Selecciona una opcion"
+                android:enabled="false"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imgSearch"/>
 
-        <Button
-            android:id="@+id/btnElegir"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Elegir"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etElegir"
-            android:visibility="gone"/>
+            <ImageView
+                android:id="@+id/imgSearch"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:clickable="true"
+                android:src="@drawable/ic_arrow_right_24"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/etElegir"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
 
         <TextView
             android:id="@+id/tvCantidad"
@@ -77,7 +100,7 @@
             tools:layout_editor_absoluteY="66dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btnElegir" />
+            app:layout_constraintTop_toBottomOf="@id/clyElegir" />
 
 
 
@@ -85,8 +108,9 @@
             android:id="@+id/etCantidad"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Ingresa cantidad"
-            android:digits="0123456789"
+            android:hint="Ingresa cantidad mt2"
+            android:digits="0123456789."
+            android:maxLength="6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvCantidad">
@@ -100,7 +124,9 @@
             android:text="Calcular"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@+id/etCantidad"/>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
