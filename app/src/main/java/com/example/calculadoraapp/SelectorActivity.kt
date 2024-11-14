@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.calculadoraapp.models.Configuracion
 import com.example.calculadoraapp.services.ConfiguracionService
 import com.example.calculadoraapp.utils.Utils
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import retrofit2.Call
@@ -70,18 +72,49 @@ class SelectorActivity : AppCompatActivity() {
         val rvOpciones = findViewById<RecyclerView>(R.id.rvOpciones)
         val adapter = ConfiguracionAdapter(listConfiguracion, object : ConfiguracionAdapter.OnItemSelectedListener{
             override fun OnItemSelected(item: Configuracion) {
-                Toast.makeText(this@SelectorActivity, item.construccion, Toast.LENGTH_SHORT).show()
-
-                val intent = Intent()
-                intent.putExtra("configuracion",Gson().toJson(item))
-                setResult(Activity.RESULT_OK,intent)
-                finish()
+//                Toast.makeText(this@SelectorActivity, item.construccion, Toast.LENGTH_SHORT).show()
+//
+//                val intent = Intent()
+//                intent.putExtra("configuracion",Gson().toJson(item))
+//                setResult(Activity.RESULT_OK,intent)
+//                finish()
+                showDetalleMateriales(item)
             }
         })
 
         rvOpciones.layoutManager = LinearLayoutManager(this)
         rvOpciones.setHasFixedSize(true)
         rvOpciones.adapter = adapter
+    }
+
+    fun showDetalleMateriales(item: Configuracion){
+        val dialog = BottomSheetDialog(this)
+        val viewDialog = layoutInflater.inflate(R.layout.material_configuracion_dialog, null)
+        val imgCloseDialog = viewDialog.findViewById<ImageView>(R.id.imgCloseDialog)
+        val btnSeleccionarConf = viewDialog.findViewById<Button>(R.id.btnSeleccionarConf)
+        val rvMateriales = viewDialog.findViewById<RecyclerView>(R.id.rvMateriales)
+
+        val adaptetMaterials = MaterialesAdapter(item.materiales)
+
+        rvMateriales.layoutManager = LinearLayoutManager(this)
+        rvMateriales.setHasFixedSize(true)
+        rvMateriales.adapter = adaptetMaterials
+
+        imgCloseDialog.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        btnSeleccionarConf.setOnClickListener {
+            val intent = Intent()
+            intent.putExtra("configuracion",Gson().toJson(item))
+            setResult(Activity.RESULT_OK,intent)
+            finish()
+            dialog.dismiss()
+        }
+
+        dialog.setCancelable(false)
+        dialog.setContentView(viewDialog)
+        dialog.show()
     }
 
     val materiales = """[
